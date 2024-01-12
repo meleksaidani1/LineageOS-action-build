@@ -32,13 +32,15 @@ jobs:
       - name: Initialize the LineageOS source repository
         run: |
           cd ~/android/lineage
-          repo init -u https://github.com/Halium/android -b halium-7.1 --depth=1 
+          repo init -u https://github.com/LineageOS/android.git -b lineage-19.1 --git-lfs
           repo sync
 
       - name: Prepare the device-specific code
         run: |
           cd ~/android/lineage
-          #git clone https://github.com/flydrz/android_device_oppo_PBEM00 -b dummy_lineage-17.1
+
+          https://github.com/meleksaidani1/android_device_samsung_a10sS -b untested/lineage-19.1
+          https://github.com/meleksaidani1/android_vendor_samsung_a10s -b lineage-17.1
           source build/envsetup.sh
           breakfast Z00A
       
@@ -65,7 +67,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-              ~/android/lineage/$OUT/lineage-*-UNOFFICIAL-dumpling.zip
+              ~/android/lineage/$OUT/lineage-*-UNOFFICIAL-a10s.zip
           name: lineageos-${{ github.run_id }}
           tag_name: ${{ github.run_id }}
           body: lineageos 17.1
